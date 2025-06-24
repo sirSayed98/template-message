@@ -1,0 +1,10 @@
+input {
+  border-radius: 8px;
+  border: 1px solid #C2C2C2;
+}
+
+input::placeholder {
+  color: #A3A3A3;
+  font-size: 14px;
+  font-weight: 500;
+}
