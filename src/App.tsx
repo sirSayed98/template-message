@@ -4,7 +4,9 @@ function App() {
   
   return (
     <>
-     Home page
+     <h1 className='text-3xl text-red-500 font-bold underline'>
+      Test Tailwind is working
+     </h1>
     </>
   )
 }
