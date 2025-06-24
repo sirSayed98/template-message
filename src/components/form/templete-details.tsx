@@ -4,7 +4,7 @@ import FormMultiSelect from '../common/form-multi-select'
 
 export default function TempleteDetails() {
   return (
-    <>
+    <div className='mt-8'>
       <FormInputHeader
         title='Template Details'
         description='Define your template name and language'
@@ -28,6 +28,6 @@ export default function TempleteDetails() {
         />
         </div>
       </div>
-    </>
+    </div>
   )
 }
