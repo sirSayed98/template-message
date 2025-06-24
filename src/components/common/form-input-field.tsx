@@ -1,8 +1,7 @@
 import './form.css';
 export default function FormInputField({ label, placeholder, name, onChangeHandler }: { label: string, placeholder: string, name: string, onChangeHandler: (e: React.ChangeEvent<HTMLInputElement>) => void }) {
   return (
-    // add asterisk to the label if it is required
-    <div className='my-2 p-4 bg-white'>
+    <div>
       {
       label &&
          <label htmlFor={name} className="block text-sm font-normal text-gray-700 mb-2">
