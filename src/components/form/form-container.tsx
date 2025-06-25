@@ -1,10 +1,17 @@
 import Category from './category';
 import TempleteDetails from './templete-details';
+import Body from './body';
+import Footer from './footer';
+import Header from './header';
+
 export default function FormContainer() {
   return (
     <>
       <TempleteDetails />
       <Category onCategorySelect={() => {}} />
+      <Body />
+      <Header />
+      <Footer />
     </>
   )
 }
