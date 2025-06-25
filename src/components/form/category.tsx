@@ -43,7 +43,7 @@ const MessageCategorySection = ({
         title='Category'
         description='Choose your message template'
       />
-      <div className='p-4 space-y-3 bg-white mt-1'>
+      <div className='p-4 space-y-3 bg-white mt-1 rounded-sm'>
         {categories.map(category => (
           <div
             key={category.id}
