@@ -13,7 +13,7 @@ export default function FormInputField({ label, placeholder, name, onChangeHandl
         type="text"
         name={name}
         onChange={onChangeHandler}
-        className="w-full px-3 py-2 border focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500"
+        className="w-full bg-white px-3 py-2 border focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500"
         placeholder={placeholder}
       />
     </div>

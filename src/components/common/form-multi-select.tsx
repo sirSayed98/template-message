@@ -30,7 +30,7 @@ export default function FormMultiSelect({
       <select
         value={selectedKey}
         onChange={handleChange}
-        style={{ color: selectedKey === '' ? '#A3A3A3' : 'black' , height: '42px'}}
+        style={{ color: selectedKey === '' ? '#A3A3A3' : 'black' , height: '42px', backgroundColor: 'white'}}
         className='w-full px-2 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500'
       >
         {options.map(option => (
