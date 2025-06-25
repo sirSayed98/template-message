@@ -14,7 +14,7 @@ export default function ButtonConfig() {
   }
 
   return (
-    <div className='space-y-4'>
+    <div className='bg-gray-50 p-4 rounded-md border border-gray-200'>
       <div className='flex flex-col sm:flex-row gap-6'>
         {/* Button Type */}
         <div className='w-full sm:w-1/3'>

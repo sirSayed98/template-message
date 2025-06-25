@@ -3,6 +3,7 @@ import TempleteDetails from './templete-details';
 import Body from './body';
 import Footer from './footer';
 import Header from './header';
+import Buttons from './buttons';
 
 export default function FormContainer() {
   return (
@@ -12,6 +13,7 @@ export default function FormContainer() {
       <Body />
       <Header />
       <Footer />
+      <Buttons />
     </>
   )
 }
