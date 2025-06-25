@@ -1,4 +1,5 @@
 import FormContainer from './form/form-container';
+import PreviewWrapper from './preview/preview-wrapper';
 import TempleteBreadcrumb from './templete-breadcrumb';
 
 export default function TemplateWrapper() {
@@ -11,7 +12,7 @@ export default function TemplateWrapper() {
         </div>
         <div className="w-full md:w-1/3">
           <div className="p-4">
-            {/* TODO: add the template preview here */}
+            <PreviewWrapper />
           </div>
         </div>
       </div>
