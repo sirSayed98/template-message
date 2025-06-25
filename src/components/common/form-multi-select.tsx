@@ -22,7 +22,7 @@ export default function FormMultiSelect({
     <div>
       <label
         htmlFor={label}
-        className='block text-sm font-normal text-gray-700 mb-2'
+        className={`block text-sm font-normal text-gray-700 mb-2 ${label ? '' : 'invisible'}`}
       >
         {label} <span className='text-red-500'>*</span>
       </label>
@@ -30,8 +30,8 @@ export default function FormMultiSelect({
       <select
         value={selectedKey}
         onChange={handleChange}
-        style={{ color: selectedKey === '' ? '#A3A3A3' : 'black' }}
-        className='w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500'
+        style={{ color: selectedKey === '' ? '#A3A3A3' : 'black' , height: '42px'}}
+        className='w-full px-2 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500'
       >
         {options.map(option => (
           <option
