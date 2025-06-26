@@ -1,8 +1,10 @@
 import { Phone, SquareArrowOutUpRight } from 'lucide-react';
 import { useTemplate } from '@/context/templateHook';
+import { getCurrentTimeFormatted } from '@/utils/getCurrentTime';
 
 export default function MessageContainer() {
-  const { body } = useTemplate();
+  const { body ,footer} = useTemplate();
+  const currentTime = getCurrentTimeFormatted();
 
   return (
     <div
@@ -21,10 +23,12 @@ export default function MessageContainer() {
             { body }
           </p>
           {/* footer */}
-          <div className="flex justify-between items-center mt-4 text-xs text-gray-400">
-            <span>Powered by arabot</span>
-            <span>14:05 PM</span>
-          </div>
+          {footer && (
+            <div className="flex justify-between items-center mt-4 text-xs text-gray-400">
+              <span>{footer}</span>
+              <span>{currentTime}</span>
+            </div>
+          )}
         </div>
         <div className="border-t border-gray-200">
           {/* website link */}

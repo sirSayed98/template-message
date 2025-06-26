@@ -1,7 +1,9 @@
+import { useTemplate } from '@/context/templateHook';
 import FormInputField from '../common/form-input-field';
 import FormInputHeader from '../common/form-input-header';
 
 export default function Footer() {
+  const { setFooter } = useTemplate();
   return (
     <div className='mt-8'>
      <FormInputHeader 
@@ -13,7 +15,9 @@ export default function Footer() {
       name='footer'
       label=''
       placeholder='Footer'
-      onChangeHandler={() => {}}
+      onChangeHandler={(e) => {
+        setFooter(e.target.value);
+      }}
      />
      </div>
     </div>

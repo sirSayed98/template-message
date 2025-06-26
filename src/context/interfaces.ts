@@ -8,7 +8,7 @@ export interface TemplateContextType {
   //   content?: string;
   //   imageUrl?: string;
   // };
-  // footer: string;
+  footer: string;
   // buttons: Array<{
   //   type: 'url' | 'phone';
   //   text: string;
@@ -16,9 +16,11 @@ export interface TemplateContextType {
   // }>;
   setTemplateName: (templateName: string) => void;
   setBody: (body: string) => void;
+  setFooter: (footer: string) => void;
 }
 
 export interface TemplateStateType {
   templateName: string;
   body: string;
+  footer: string;
 }

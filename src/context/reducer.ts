@@ -1,5 +1,5 @@
 import type { TemplateStateType } from "./interfaces";
-import { SET_BODY, SET_TEMPLATE_NAME } from './types';
+import { SET_BODY, SET_FOOTER, SET_TEMPLATE_NAME } from './types';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const templateReducer = (state: TemplateStateType, action: any) => {
@@ -8,6 +8,8 @@ export const templateReducer = (state: TemplateStateType, action: any) => {
       return { ...state, templateName: action.payload };
     case SET_BODY:
       return { ...state, body: action.payload };
+    case SET_FOOTER:
+      return { ...state, footer: action.payload };
     default:
       return state;
   }
