@@ -4,12 +4,13 @@ import type { ButtonType as ButtonTypeInterface } from '@/context/interfaces'
 import { type ChangeEvent, useState } from 'react'
 import PhoneNumber from './phone-number'
 
-export default function ButtonConfig() {
+export default function ButtonConfig({ id, onChange }: { id: number,  onChange: (id: number, buttonState: ButtonTypeInterface) => void }) {
   const [buttonState, setButtonState] = useState({
     type: 'URL',
     text: '',
     value: {}
   })
+ 
 
   return (
     <div className='bg-gray-50 p-4 rounded-md border border-gray-200'>
@@ -23,7 +24,9 @@ export default function ButtonConfig() {
               { key: 'CALL', value: 'Phone Number' }
             ]}
             onChangeHandler={(key: string) => {
-              setButtonState({ ...buttonState, type: key as ButtonTypeInterface['type'], value: {}})
+              const newButtonState = { ...buttonState, type: key as ButtonTypeInterface['type'], value: {}}
+              setButtonState(newButtonState)
+              onChange(id, newButtonState as ButtonTypeInterface)
             }}
           />
         </div>
@@ -33,7 +36,11 @@ export default function ButtonConfig() {
             label='Button Text'
             placeholder=''
             name='buttonText'
-            onChangeHandler={(e: ChangeEvent<HTMLInputElement>) => setButtonState({ ...buttonState, text: e.target.value })}
+            onChangeHandler={(e: ChangeEvent<HTMLInputElement>) => {
+              const newButtonState = { ...buttonState, text: e.target.value }
+              setButtonState(newButtonState)
+              onChange(id, newButtonState as ButtonTypeInterface)
+            }}
           />
         </div>
 
@@ -44,19 +51,22 @@ export default function ButtonConfig() {
               label='Website URL'
               placeholder='https://arabot.io'
               name='websiteUrl'
-              onChangeHandler={(e: ChangeEvent<HTMLInputElement>) =>
-                setButtonState({
-                  ...buttonState, value: {
-                    url: e.target.value
-                  }
-                })}
+              onChangeHandler={(e: ChangeEvent<HTMLInputElement>) =>{
+                const newButtonState = { ...buttonState, value: {
+                  url: e.target.value
+                }}
+                setButtonState(newButtonState)
+                onChange(id, newButtonState as ButtonTypeInterface)
+              }}
             />
           ) : (
-            <PhoneNumber onChange={(phoneNumber: string) => setButtonState({
-              ...buttonState, value: {
+            <PhoneNumber onChange={(phoneNumber: string) =>{
+              const newButtonState = { ...buttonState, value: {
                 phone_number: phoneNumber
-              }
-            })} />
+              }}
+              setButtonState(newButtonState)
+              onChange(id, newButtonState as ButtonTypeInterface)
+            }} />
           )}
         </div>
       </div>

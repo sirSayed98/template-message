@@ -1,29 +1,32 @@
 import type { ButtonType } from '@/context/interfaces'
 import { useTemplate } from '@/context/templateHook'
 import { Trash2 } from 'lucide-react'
-import { useEffect, useState } from 'react'
+import { useMemo, useState } from 'react'
 import ButtonConfig from './button-config'
 
 export default function CallToActionsWrapper() {
   const [count, setCount] = useState(1)
-  const emptyButton: ButtonType = {
+  
+  const emptyButton: ButtonType = useMemo(() => ({
     type: 'URL',
     text: '',
     value: {
       url: ''
     }
-  }
+  }), [])
 
   const { setButtons,buttons } = useTemplate()
   
-  useEffect(() => {
-    setButtons([emptyButton])
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [setButtons])
   
   const addButton = () => {
     setCount(count + 1)
     setButtons([...buttons, emptyButton])
+  }
+  
+  const handleButtonChange = (id: number, button: ButtonType) => {
+    const newButtons = [...buttons]
+    newButtons[id] = button
+    setButtons(newButtons)
   }
 
  
@@ -32,7 +35,7 @@ export default function CallToActionsWrapper() {
       {Array.from({ length: count }).map((_, index) => (
         <div key={index} className='mt-4 flex items-center justify-between gap-2'>
           <div className='w-full'>
-            <ButtonConfig />
+            <ButtonConfig id={index} onChange={handleButtonChange} />
           </div>
           <Trash2 onClick={() => setCount(count - 1)} size={16} className='cursor-pointer' color='gray' />
         </div>
