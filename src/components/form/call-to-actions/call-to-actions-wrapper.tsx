@@ -1,9 +1,32 @@
+import type { ButtonType } from '@/context/interfaces'
+import { useTemplate } from '@/context/templateHook'
 import { Trash2 } from 'lucide-react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import ButtonConfig from './button-config'
 
 export default function CallToActionsWrapper() {
   const [count, setCount] = useState(1)
+  const emptyButton: ButtonType = {
+    type: 'URL',
+    text: '',
+    value: {
+      url: ''
+    }
+  }
+
+  const { setButtons,buttons } = useTemplate()
+  
+  useEffect(() => {
+    setButtons([emptyButton])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [setButtons])
+  
+  const addButton = () => {
+    setCount(count + 1)
+    setButtons([...buttons, emptyButton])
+  }
+
+ 
   return (
     <>
       {Array.from({ length: count }).map((_, index) => (
@@ -16,7 +39,7 @@ export default function CallToActionsWrapper() {
       ))}
       {count < 2 && (
         <button
-          onClick={() => setCount(count + 1)}
+          onClick={addButton}
           className='mt-4 bg-[#9b7cb7] text-white text-sm px-4 py-2 rounded cursor-pointer'
         >
           <span className='text-sm font-medium'>Add action</span>

@@ -1,8 +1,8 @@
 import { useReducer } from "react";
 import TemplateContext from "./context";
 import { templateReducer } from "./reducer";
-import { SET_BODY, SET_CATEGORY, SET_FOOTER, SET_HEADER, SET_LANGUAGE, SET_TEMPLATE_NAME } from './types';
-import type { HeaderType } from './interfaces';
+import { SET_BODY, SET_BUTTONS, SET_CATEGORY, SET_FOOTER, SET_HEADER, SET_LANGUAGE, SET_TEMPLATE_NAME } from './types';
+import type { ButtonType, HeaderType } from './interfaces';
 
 export const TemplateState = ({ children }: { children: React.ReactNode }) => {
   
@@ -15,6 +15,7 @@ export const TemplateState = ({ children }: { children: React.ReactNode }) => {
     header: {
       format: 'none'
     },
+    buttons: [],
   });
 
   const setTemplateName = (templateName: string) => {
@@ -41,6 +42,10 @@ export const TemplateState = ({ children }: { children: React.ReactNode }) => {
     dispatch({ type: SET_HEADER, payload: header });
   };
 
+  const setButtons = (buttons: Array<ButtonType>) => {
+    dispatch({ type: SET_BUTTONS, payload: buttons });
+  };
+
     return (
     <TemplateContext.Provider 
       value={{ 
@@ -50,12 +55,14 @@ export const TemplateState = ({ children }: { children: React.ReactNode }) => {
         footer: state.footer,
         category: state.category,
         header: state.header,
+        buttons: state.buttons,
         setTemplateName,
         setBody,
         setFooter,
         setLanguage,
         setCategory,
         setHeader,
+        setButtons,
       }}>
       {children}
     </TemplateContext.Provider>
