@@ -1,7 +1,7 @@
 import { useReducer } from "react";
 import TemplateContext from "./context";
 import { templateReducer } from "./reducer";
-import { SET_BODY, SET_FOOTER, SET_TEMPLATE_NAME } from './types';
+import { SET_BODY, SET_FOOTER, SET_LANGUAGE, SET_TEMPLATE_NAME } from './types';
 
 export const TemplateState = ({ children }: { children: React.ReactNode }) => {
   
@@ -9,6 +9,7 @@ export const TemplateState = ({ children }: { children: React.ReactNode }) => {
     templateName: '',
     body: '',
     footer: '',
+    language: '',
   });
 
   const setTemplateName = (templateName: string) => {
@@ -23,15 +24,21 @@ export const TemplateState = ({ children }: { children: React.ReactNode }) => {
     dispatch({ type: SET_FOOTER, payload: footer });
   };
 
+  const setLanguage = (language: string) => {
+    dispatch({ type: SET_LANGUAGE, payload: language });
+  };
+
   return (
     <TemplateContext.Provider 
       value={{ 
         templateName: state.templateName,
-        setTemplateName,
+        language: state.language,
         body: state.body,
-        setBody,
         footer: state.footer,
+        setTemplateName,
+        setBody,
         setFooter,
+        setLanguage,
       }}>
       {children}
     </TemplateContext.Provider>

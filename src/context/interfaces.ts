@@ -1,6 +1,6 @@
 export interface TemplateContextType {
   templateName: string;
-  // language: string;
+  language: string;
   // category: string;
   body: string;
   // header: {
@@ -15,12 +15,14 @@ export interface TemplateContextType {
   //   value: string;
   // }>;
   setTemplateName: (templateName: string) => void;
+  setLanguage: (language: string) => void;
   setBody: (body: string) => void;
   setFooter: (footer: string) => void;
 }
 
 export interface TemplateStateType {
   templateName: string;
+  language: string;
   body: string;
   footer: string;
 }

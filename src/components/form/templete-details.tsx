@@ -1,8 +1,10 @@
-import FormInputField from '../common/form-input-field'
-import FormInputHeader from '../common/form-input-header'
-import FormMultiSelect from '../common/form-multi-select'
+import { useTemplate } from '@/context/templateHook';
+import FormInputField from '@/components/common/form-input-field';
+import FormInputHeader from '@/components/common/form-input-header';
+import FormMultiSelect from '@/components/common/form-multi-select';
 
 export default function TempleteDetails() {
+  const { setTemplateName, setLanguage} = useTemplate();
   return (
     <div className='mt-8'>
       <FormInputHeader
@@ -14,7 +16,9 @@ export default function TempleteDetails() {
           label='Template Name'
           placeholder='Template Name'
           name='templateName'
-          onChangeHandler={() => {}}
+          onChangeHandler={(e) => {
+            setTemplateName(e.target.value);
+          }}
         />
         <div className='mt-2'>
         <FormMultiSelect
@@ -24,7 +28,9 @@ export default function TempleteDetails() {
             { key: 'ar_SA', value: 'Arabic(SA)' },
           ]}
           label='Language'
-          onChangeHandler={() => {}}
+          onChangeHandler={(e) => {
+            setLanguage(e);
+          }}
         />
         </div>
       </div>
