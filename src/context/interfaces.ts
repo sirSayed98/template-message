@@ -1,13 +1,16 @@
+export interface HeaderType {
+  format: 'none' | 'text' | 'image';
+  value?: {
+    text?: string;
+    url?: string;
+  };
+}
 export interface TemplateContextType {
   templateName: string;
   language: string;
   category: 'Marketing' | 'Utility';
   body: string;
-  // header: {
-  //   type: 'none' | 'text' | 'image';
-  //   content?: string;
-  //   imageUrl?: string;
-  // };
+  header: HeaderType;
   footer: string;
   // buttons: Array<{
   //   type: 'url' | 'phone';
@@ -19,6 +22,7 @@ export interface TemplateContextType {
   setBody: (body: string) => void;
   setFooter: (footer: string) => void;
   setCategory: (category: string) => void;
+  setHeader: (header: HeaderType) => void;
 }
 
 export interface TemplateStateType {
@@ -27,4 +31,5 @@ export interface TemplateStateType {
   category: string;
   body: string;
   footer: string;
+  header: HeaderType;
 }

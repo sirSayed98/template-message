@@ -8,7 +8,7 @@ type Tab = {
   content?: React.ReactNode;
 };
 
-export default function TabsComponent({ tabs }: { tabs: Tab[] }) {
+export default function TabsComponent({ tabs,onChange }: { tabs: Tab[], onChange: (tabId: string) => void }) {
  
   const [activeTab, setActiveTab] = useState(tabs[0]?.id);
 
@@ -21,7 +21,10 @@ export default function TabsComponent({ tabs }: { tabs: Tab[] }) {
           {tabs.map((tab) => (
             <button
               key={tab.id}
-              onClick={() => setActiveTab(tab.id)}
+              onClick={() => {
+                setActiveTab(tab.id)
+                onChange(tab.id)
+              }}
               className={`flex items-center justify-center py-1 rounded-sm font-medium text-sm transition-all duration-200
                 ${activeTab === tab.id
                   ? 'bg-white text-gray-900 shadow-sm'

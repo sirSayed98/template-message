@@ -1,5 +1,5 @@
 import type { TemplateStateType } from "./interfaces";
-import { SET_BODY, SET_CATEGORY, SET_FOOTER, SET_LANGUAGE, SET_TEMPLATE_NAME } from './types';
+import { SET_BODY, SET_CATEGORY, SET_FOOTER, SET_HEADER, SET_LANGUAGE, SET_TEMPLATE_NAME } from './types';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const templateReducer = (state: TemplateStateType, action: any) => {
@@ -14,6 +14,8 @@ export const templateReducer = (state: TemplateStateType, action: any) => {
       return { ...state, language: action.payload };
     case SET_CATEGORY:
       return { ...state, category: action.payload };
+    case SET_HEADER:
+      return { ...state, header: action.payload };
     default:
       return state;
   }

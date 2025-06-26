@@ -2,8 +2,9 @@ import { Phone, SquareArrowOutUpRight } from 'lucide-react';
 import { useTemplate } from '@/context/templateHook';
 import { getCurrentTimeFormatted } from '@/utils/getCurrentTime';
 
+
 export default function MessageContainer() {
-  const { body ,footer} = useTemplate();
+  const { body ,footer,header} = useTemplate();
   const currentTime = getCurrentTimeFormatted();
 
   return (
@@ -15,9 +16,15 @@ export default function MessageContainer() {
         <div className="absolute w-4 h-3 bg-white transform rotate-50 left-[-5px] top-[12px]"></div>
         <div>
           {/* header */}
-          <h2 className="text-lg font-bold text-gray-800">
-            Don't miss out on our latest offers!
-          </h2>
+          {header.format === 'text' && (
+            <h2 className="text-lg font-bold text-gray-800">
+              {header.value?.text}
+            </h2>
+          )}
+          
+          {header.format === 'image' && (
+            <img src={header.value?.url} alt="header" className="w-full h-full object-cover" />
+          )}
           {/* body */}
           <p className="text-gray-700 text-sm">
             { body }
