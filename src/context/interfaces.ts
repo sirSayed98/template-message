@@ -1,7 +1,7 @@
 export interface TemplateContextType {
   templateName: string;
   language: string;
-  // category: string;
+  category: 'Marketing' | 'Utility';
   body: string;
   // header: {
   //   type: 'none' | 'text' | 'image';
@@ -18,11 +18,13 @@ export interface TemplateContextType {
   setLanguage: (language: string) => void;
   setBody: (body: string) => void;
   setFooter: (footer: string) => void;
+  setCategory: (category: string) => void;
 }
 
 export interface TemplateStateType {
   templateName: string;
   language: string;
+  category: string;
   body: string;
   footer: string;
 }

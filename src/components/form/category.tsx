@@ -1,6 +1,7 @@
+import { useTemplate } from '@/context/templateHook'
 import { Bell, CircleCheck, Megaphone } from 'lucide-react'
 import React, { useState } from 'react'
-import FormInputHeader from '../common/form-input-header'
+import FormInputHeader from '@/components/common/form-input-header'
 
 interface CategoryOption {
   id: string
@@ -9,23 +10,20 @@ interface CategoryOption {
   icon: React.ReactNode
 }
 
-const MessageCategorySection = ({
-  onCategorySelect,
-}: {
-  onCategorySelect: (categoryId: string) => void
-}) => {
+const MessageCategorySection = () => {
   const [selected, setSelected] = useState('')
+  const { setCategory } = useTemplate();
 
   const categories: CategoryOption[] = [
     {
-      id: 'marketing',
+      id: 'Marketing',
       title: 'Marketing',
       description:
         'Send promotions and information about your products, services or business.',
       icon: <Megaphone />,
     },
     {
-      id: 'utility',
+      id: 'Utility',
       title: 'Utility',
       description: 'Send messages about an existing order or account.',
       icon: <Bell />,
@@ -34,7 +32,7 @@ const MessageCategorySection = ({
 
   const handleCategorySelect = (categoryId: string) => {
     setSelected(categoryId)
-    onCategorySelect?.(categoryId)
+    setCategory(categoryId)
   }
 
   return (

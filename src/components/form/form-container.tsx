@@ -9,7 +9,7 @@ export default function FormContainer() {
   return (
     <>
       <TempleteDetails />
-      <Category onCategorySelect={() => {}} />
+      <Category  />
       <Body />
       <Header />
       <Footer />
