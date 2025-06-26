@@ -1,12 +1,17 @@
-import { Phone, SquareArrowOutUpRight } from 'lucide-react';
 import { useTemplate } from '@/context/templateHook';
 import { getCurrentTimeFormatted } from '@/utils/getCurrentTime';
+import { Phone, SquareArrowOutUpRight } from 'lucide-react';
 
 
 export default function MessageContainer() {
-  const { body ,footer,header} = useTemplate();
+  const { body, footer, header, buttons } = useTemplate();
   const currentTime = getCurrentTimeFormatted();
+  const shouldShowMessage = body.length > 0 ||
+    footer.length > 0 ||
+    header?.format !== 'none' ||
+    buttons.length > 0;
 
+  if (!shouldShowMessage) return null;
   return (
     <div
       className={`transform transition-all duration-500 ease-out translate-x-0 translate-y-0 opacity-100 scale-100`}
@@ -21,13 +26,13 @@ export default function MessageContainer() {
               {header.value?.text}
             </h2>
           )}
-          
+
           {header.format === 'image' && (
             <img src={header.value?.url} alt="header" className="w-full h-full object-cover" />
           )}
           {/* body */}
           <p className="text-gray-700 text-sm">
-            { body }
+            {body}
           </p>
           {/* footer */}
           {footer && (
@@ -37,22 +42,18 @@ export default function MessageContainer() {
             </div>
           )}
         </div>
-        <div className="border-t border-gray-200">
-          {/* website link */}
-          <button
-            className="w-full flex items-center justify-center gap-1 py-3 text-[#00A5F4] font-medium"
-          >
-            <SquareArrowOutUpRight size={16} />
-            Offer Details
-          </button>
-          <hr className="border-gray-200" />
-          {/* phone button */}
-          <button
-            className="w-full flex items-center justify-center gap-1 py-3 text-[#00A5F4] font-medium"
-          >
-            <Phone size={16} />
-            Call
-          </button>
+        <div>
+          {buttons.map((button, index) => (
+            <>
+              <hr className="border-gray-200" />
+              <button key={index} className="w-full flex items-center justify-center gap-1 py-3 text-[#00A5F4] font-medium cursor-pointer">
+                {button.type === 'URL' && <SquareArrowOutUpRight size={16} />}
+                {button.type === 'CALL' && <Phone size={16} />}
+                {button.text}
+              </button>
+            </>
+          ))}
+
         </div>
       </div>
     </div>
