@@ -2,7 +2,7 @@ export interface TemplateContextType {
   templateName: string;
   // language: string;
   // category: string;
-  // body: string;
+  body: string;
   // header: {
   //   type: 'none' | 'text' | 'image';
   //   content?: string;
@@ -15,8 +15,10 @@ export interface TemplateContextType {
   //   value: string;
   // }>;
   setTemplateName: (templateName: string) => void;
+  setBody: (body: string) => void;
 }
 
 export interface TemplateStateType {
   templateName: string;
+  body: string;
 }

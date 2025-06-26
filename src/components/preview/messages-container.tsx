@@ -1,6 +1,9 @@
 import { Phone, SquareArrowOutUpRight } from 'lucide-react';
+import { useTemplate } from '@/context/templateHook';
 
 export default function MessageContainer() {
+  const { body } = useTemplate();
+
   return (
     <div
       className={`transform transition-all duration-500 ease-out translate-x-0 translate-y-0 opacity-100 scale-100`}
@@ -15,7 +18,7 @@ export default function MessageContainer() {
           </h2>
           {/* body */}
           <p className="text-gray-700 text-sm">
-            Hey, shop now through our online store and use code <strong>OFFR30</strong> to get 30% off of all products.
+            { body }
           </p>
           {/* footer */}
           <div className="flex justify-between items-center mt-4 text-xs text-gray-400">

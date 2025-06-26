@@ -1,6 +1,9 @@
+import { useTemplate } from '@/context/templateHook';
 import FormInputHeader from '../common/form-input-header';
 
 export default function Body() {
+  const { setBody } = useTemplate();
+  
   return (
     <div className='mt-8'>
       <FormInputHeader title='Body' description='Enter the text of your message in the language you’ve selected' />
@@ -15,6 +18,9 @@ export default function Body() {
           borderRadius: '4px',
           padding: '8px',
           fontSize: '16px',
+        }}
+        onChange={(e) => {
+          setBody(e.target.value);
         }}
       />
       </div>
