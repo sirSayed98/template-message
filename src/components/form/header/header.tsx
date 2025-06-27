@@ -1,9 +1,9 @@
 import { useTemplate } from '@/context/templateHook';
-import { AlignJustify, CloudUpload, Image } from 'lucide-react';
-import FormInputField from '../common/form-input-field';
-import FormInputHeader from '../common/form-input-header';
-import TabsComponent from '../common/tabs';
-
+import { AlignJustify, Image } from 'lucide-react';
+import FormInputField from '@/components/common/form-input-field';
+import FormInputHeader from '@/components/common/form-input-header';
+import TabsComponent from '@/components/common/tabs';
+import ImageUploader from './image-uploader';
 
 export default function Header() {
   const { setHeader } = useTemplate();
@@ -34,16 +34,7 @@ export default function Header() {
       label: 'Image',
       icon: <Image size={16} />,
       content: (
-        <div className='mt-4'>
-          <div className='p-4 rounded-lg'>
-            <div className='border-2 border-dashed border-gray-300 rounded-lg p-4 py-10 text-center'>
-             <div className='flex items-center justify-center'>
-             <CloudUpload size={38} />
-             </div>
-              <p className='text-gray-600 mt-2'>Click to upload image</p>
-            </div>
-          </div>
-        </div>
+        <ImageUploader/>
       ),
     },
   ]
@@ -61,8 +52,8 @@ export default function Header() {
       />
       <div className='p-4 space-y-3 bg-white mt-1 rounded-sm'>
         <TabsComponent tabs={tabs}
-         onChange={resetHeader}
-         />
+          onChange={resetHeader}
+        />
       </div>
     </div>
   )
