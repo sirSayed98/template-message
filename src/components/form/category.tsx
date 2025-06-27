@@ -10,25 +10,27 @@ interface CategoryOption {
   icon: React.ReactNode
 }
 
+const categories: CategoryOption[] = [
+  {
+    id: 'Marketing',
+    title: 'Marketing',
+    description:
+      'Send promotions and information about your products, services or business.',
+    icon: <Megaphone />,
+  },
+  {
+    id: 'Utility',
+    title: 'Utility',
+    description: 'Send messages about an existing order or account.',
+    icon: <Bell />,
+  },
+]
+
 const MessageCategorySection = () => {
   const [selected, setSelected] = useState('')
-  const { setCategory } = useTemplate();
+  const { setCategory, runValidation } = useTemplate()
 
-  const categories: CategoryOption[] = [
-    {
-      id: 'Marketing',
-      title: 'Marketing',
-      description:
-        'Send promotions and information about your products, services or business.',
-      icon: <Megaphone />,
-    },
-    {
-      id: 'Utility',
-      title: 'Utility',
-      description: 'Send messages about an existing order or account.',
-      icon: <Bell />,
-    },
-  ]
+  const categoryErrorMsg = runValidation && !selected && 'Category is required'
 
   const handleCategorySelect = (categoryId: string) => {
     setSelected(categoryId)
@@ -93,9 +95,14 @@ const MessageCategorySection = () => {
                 <CircleCheck color='blue' size={20} />
               )}
             </div>
-            
           </div>
         ))}
+
+        {categoryErrorMsg && (
+          <span className='text-red-500 mt-1'>
+            {categoryErrorMsg as string}
+          </span>
+        )}
       </div>
     </div>
   )
