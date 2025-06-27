@@ -10,8 +10,8 @@ export default function FormContainer() {
     <>
       <TempleteDetails />
       <Category  />
-      <Body />
       <Header />
+      <Body />
       <Footer />
       <Buttons />
     </>

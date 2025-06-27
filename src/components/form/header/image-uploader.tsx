@@ -2,6 +2,7 @@ import { type ChangeEvent, useRef, useState } from 'react'
 import ImageDragDrop from './image-drag-drop'
 import ImagePreview from './image-preview'
 import ImageSelection from './image-selection'
+import { useTemplate } from '@/context/templateHook'
 
 interface ImageFile {
   file: File
@@ -9,6 +10,7 @@ interface ImageFile {
 }
 
 const ImageUploader = () => {
+  const { setHeader} = useTemplate()
   const [isDragOver, setIsDragOver] = useState(false)
   const [uploadedImage, setUploadedImage] = useState<ImageFile | null>(null)
   const [error, setError] = useState<string>('')
@@ -39,6 +41,12 @@ const ImageUploader = () => {
 
       const preview = URL.createObjectURL(file)
       setUploadedImage({ file, preview })
+      setHeader({
+        format: 'image',
+        value: {
+          image: { file, preview }
+        }
+      })
     }
   }
 
@@ -64,6 +72,12 @@ const ImageUploader = () => {
       if (fileInputRef.current) {
         fileInputRef.current.value = ''
       }
+      setHeader({
+        format: 'none',
+        value: {
+          image: undefined
+        }
+      })
     }
   }
 

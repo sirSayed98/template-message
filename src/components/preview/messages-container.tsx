@@ -20,6 +20,9 @@ export default function MessageContainer() {
       <div className="text-left relative bg-white rounded-md shadow-xl border border-gray-200 p-3 max-w-sm">
         <div className="absolute w-4 h-3 bg-white transform rotate-50 left-[-5px] top-[12px]"></div>
         <div>
+          {header.format === 'image' && (
+             <img src={header.value?.image?.preview} alt="header-image" className="w-full h-full mb-3 object-cover" />
+          )}
           {/* header */}
           {header.format === 'text' && (
             <h2 className="text-lg font-bold text-gray-800">
@@ -27,9 +30,6 @@ export default function MessageContainer() {
             </h2>
           )}
 
-          {header.format === 'image' && (
-            <img src={header.value?.url} alt="header" className="w-full h-full object-cover" />
-          )}
           {/* body */}
           <p className="text-gray-700 text-sm">
             {body}

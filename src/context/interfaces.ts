@@ -1,8 +1,12 @@
+interface ImageFile {
+  file: File
+  preview: string
+}
 export interface HeaderType {
   format: 'none' | 'text' | 'image';
   value?: {
     text?: string;
-    url?: string;
+    image?: ImageFile;
   };
 }
 export interface ButtonType {
