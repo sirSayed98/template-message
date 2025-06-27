@@ -1,14 +1,14 @@
-import React, { type ChangeEvent, type DragEvent, useRef, useState } from 'react';
-import PreviewImage from './preview';
+import { type ChangeEvent, useRef, useState } from 'react';
+import ImageDragDrop from './image-drag-drop';
 import ImageSelection from './image-selection';
+import ImagePreview from './image-preview';
 
 interface ImageFile {
   file: File;
   preview: string;
 }
 
-const ImageDragDrop: React.FC = () => {
-  const [isDragOver, setIsDragOver] = useState(false);
+const ImageUploader = () => {
   const [uploadedImage, setUploadedImage] = useState<ImageFile | null>(null);
   const [error, setError] = useState<string>('');
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -41,34 +41,6 @@ const ImageDragDrop: React.FC = () => {
     }
   };
 
-  const handleDragEnter = (e: DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setIsDragOver(true);
-  };
-
-  const handleDragLeave = (e: DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setIsDragOver(false);
-  };
-
-  const handleDragOver = (e: DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
-  };
-
-  const handleDrop = (e: DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setIsDragOver(false);
-
-    const files = e.dataTransfer.files;
-    if (files.length > 0) {
-      processFile(files[0]); // Only take the first file
-    }
-  };
-
   const handleFileSelect = (e: ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (files && files.length > 0) {
@@ -93,7 +65,8 @@ const ImageDragDrop: React.FC = () => {
       }
     }
   };
-  const handleSelectFileClick = (e:React.MouseEvent<HTMLButtonElement>) => {
+
+  const handleSelectFileClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
     fileInputRef.current?.click();
   };
@@ -101,43 +74,24 @@ const ImageDragDrop: React.FC = () => {
   return (
     <div className="w-full mx-auto">
       {/* Drag and Drop Area */}
-      <div
-        className={`
-          relative border-2 border-dashed rounded-lg overflow-hidden transition-all duration-200 ease-in-out
-          ${uploadedImage ? 'border-gray-300' : 'cursor-pointer'}
-          ${isDragOver && !uploadedImage
-            ? 'border-blue-400 bg-blue-50 scale-105'
-            : !uploadedImage
-              ? 'border-gray-300 hover:border-gray-400 hover:bg-gray-50'
-              : ''
-          }
-        `}
-        onDragEnter={handleDragEnter}
-        onDragLeave={handleDragLeave}
-        onDragOver={handleDragOver}
-        onDrop={handleDrop}
-        onClick={handleBrowseClick}
-        style={{  minHeight: '300px' }}
+      <ImageDragDrop
+        processFile={processFile}
+        uploadedImage={uploadedImage}
+        handleBrowseClick={handleBrowseClick}
+        fileInputRef={fileInputRef as React.RefObject<HTMLInputElement>}
+        handleFileSelect={handleFileSelect}
       >
-        <input
-          ref={fileInputRef}
-          type="file"
-          accept=".jpeg,.jpg,.png"
-          onChange={handleFileSelect}
-          className="hidden"
-        />
-
         {!uploadedImage ? (
           // Upload State - Button is within the frame
           <ImageSelection
-            isDragOver={isDragOver}
+            isDragOver={false}
             handleSelectFileClick={handleSelectFileClick}
           />
         ) : (
           // Preview State
-          <PreviewImage uploadedImage={uploadedImage} removeImage={removeImage} />
+          <ImagePreview uploadedImage={uploadedImage} removeImage={removeImage} />
         )}
-      </div>
+      </ImageDragDrop>
 
       {/* Error Message */}
       {error && (
@@ -149,4 +103,4 @@ const ImageDragDrop: React.FC = () => {
   );
 };
 
-export default ImageDragDrop;
+export default ImageUploader;
