@@ -1,13 +1,10 @@
 import { X } from 'lucide-react';
-
+import type { ImageFile } from '@/context/interfaces';
 export default function ImagePreview({
   uploadedImage,
   removeImage,
 }: {
-  uploadedImage: {
-    preview: string;
-    file: { name: string; size: number };
-  };
+  uploadedImage: ImageFile;
   removeImage: () => void;
 }) {
   return (

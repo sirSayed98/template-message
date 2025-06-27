@@ -1,8 +1,5 @@
 import { type DragEvent } from 'react';
-interface ImageFile {
-  file: File;
-  preview: string;
-}
+import type { ImageFile } from '@/context/interfaces';
 export default function ImageDragDrop({
   children,
   processFile,

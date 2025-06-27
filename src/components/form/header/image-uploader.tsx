@@ -3,11 +3,7 @@ import ImageDragDrop from './image-drag-drop'
 import ImagePreview from './image-preview'
 import ImageSelection from './image-selection'
 import { useTemplate } from '@/context/templateHook'
-
-interface ImageFile {
-  file: File
-  preview: string
-}
+import type { ImageFile } from '@/context/interfaces';
 
 const ImageUploader = () => {
   const { setHeader} = useTemplate()
