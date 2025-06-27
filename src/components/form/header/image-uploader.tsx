@@ -1,5 +1,6 @@
-import { CloudUpload, X } from 'lucide-react';
 import React, { type ChangeEvent, type DragEvent, useRef, useState } from 'react';
+import PreviewImage from './preview';
+import ImageSelection from './image-selection';
 
 interface ImageFile {
   file: File;
@@ -92,6 +93,10 @@ const ImageDragDrop: React.FC = () => {
       }
     }
   };
+  const handleSelectFileClick = (e:React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
+    fileInputRef.current?.click();
+  };
 
   return (
     <div className="w-full mx-auto">
@@ -124,65 +129,13 @@ const ImageDragDrop: React.FC = () => {
 
         {!uploadedImage ? (
           // Upload State - Button is within the frame
-          <div className="absolute inset-0 flex items-center justify-center p-8">
-            <div className="text-center space-y-4">
-              <div className={`mx-auto w-16 h-16  flex items-center justify-center`}>
-                <CloudUpload size={38} className={`${isDragOver ? 'text-blue-600' : 'text-gray-600'}`} />
-              </div>
-
-              <div>
-                <p className="text-lg font-medium text-gray-900 mb-4">
-                  Drag and drop file here to upload or{' '}
-                  <span className='text-[#9B7CB7] cursor-pointer'> Browse </span>
-                </p>
-                <p className='text-[#797979] mb-4'>Allowed types.jpeg, .jpg, .png</p>
-
-                {/* SELECT FILE Button - Inside the frame */}
-                
-                <button onClick={(e) => {
-                    e.stopPropagation();
-                    fileInputRef.current?.click();
-                  }} className="mt-2 px-4 py-2 border-2 border-[#9B7CB7] text-[#9B7CB7] font-medium text-md rounded-md bg-transparent cursor-pointer">
-                    SELECT FILE
-                  </button>
-              </div>
-            </div>
-
-            {isDragOver && (
-              <div className="absolute inset-0 bg-blue-50 bg-opacity-50 pointer-events-none" />
-            )}
-          </div>
+          <ImageSelection
+            isDragOver={isDragOver}
+            handleSelectFileClick={handleSelectFileClick}
+          />
         ) : (
           // Preview State
-          <div className="relative group">
-            <img
-              src={uploadedImage.preview}
-              alt={uploadedImage.file.name}
-              className="w-full h-full object-cover"
-            />
-
-            {/* Delete Button - Shows on Hover */}
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                removeImage();
-              }}
-              className="absolute top-4 right-4 bg-red-500 hover:bg-red-600 text-white rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 shadow-lg"
-              title="Delete image"
-            >
-              <X className="w-5 h-5" />
-            </button>
-
-            {/* Image Info Overlay */}
-            <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-60 text-white p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-              <p className="text-sm font-medium truncate" title={uploadedImage.file.name}>
-                {uploadedImage.file.name}
-              </p>
-              <p className="text-xs text-gray-300">
-                {(uploadedImage.file.size / 1024 / 1024).toFixed(2)} MB
-              </p>
-            </div>
-          </div>
+          <PreviewImage uploadedImage={uploadedImage} removeImage={removeImage} />
         )}
       </div>
 
