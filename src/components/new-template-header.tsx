@@ -1,17 +1,24 @@
-import { Plus, Save } from 'lucide-react';
+import { useTemplate } from '@/context/templateHook'
+import { Plus, Save } from 'lucide-react'
 
 export default function NewTemplateMessage() {
+  const { setRunValidation } = useTemplate()
   return (
-    <div className="flex items-center justify-between border-b border-[#F1F3F5] p-2">
-      <div className="flex items-center space-x-2 text-black text-sm font-medium">
-        <Plus size={16} className="text-gray-700" />
-        <span className="font-medium text-2xl">New Template Message</span>
+    <div className='flex items-center justify-between border-b border-[#F1F3F5] p-2'>
+      <div className='flex items-center space-x-2 text-black text-sm font-medium'>
+        <Plus size={16} className='text-gray-700' />
+        <span className='font-medium text-2xl'>New Template Message</span>
       </div>
-   
-      <button className="flex items-center gap-2 bg-[#9b7cb7] text-white text-sm px-4 py-2 rounded cursor-pointer">
+
+      <button
+        onClick={() => {
+          setRunValidation(true)
+        }}
+        className='flex items-center gap-2 bg-[#9b7cb7] text-white text-sm px-4 py-2 rounded cursor-pointer'
+      >
         <Save size={16} />
-        <span className="text-sm font-medium">Save</span>
+        <span className='text-sm font-medium'>Save</span>
       </button>
     </div>
-  );
+  )
 }

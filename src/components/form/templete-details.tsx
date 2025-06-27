@@ -4,7 +4,8 @@ import FormInputHeader from '@/components/common/form-input-header';
 import FormMultiSelect from '@/components/common/form-multi-select';
 
 export default function TempleteDetails() {
-  const { setTemplateName, setLanguage} = useTemplate();
+  const { setTemplateName, setLanguage , templateName, runValidation} = useTemplate();
+  const templateNameErrorMsg = runValidation && !templateName && 'Template name is required';
   return (
     <div className='mt-8'>
       <FormInputHeader
@@ -19,6 +20,7 @@ export default function TempleteDetails() {
           onChangeHandler={(e) => {
             setTemplateName(e.target.value);
           }}
+          error={templateNameErrorMsg as string}
         />
         <div className='mt-2'>
         <FormMultiSelect
