@@ -4,10 +4,12 @@ export default function FormMultiSelect({
   options,
   label,
   onChangeHandler,
+  error,
 }: {
   options: { key: string; value: string }[];
   label: string;
   onChangeHandler: (key: string) => void;
+  error?: string;
 }) {
   const [selectedKey, setSelectedKey] = useState(options[0].key);
 
@@ -43,6 +45,7 @@ export default function FormMultiSelect({
           </option>
         ))}
       </select>
+      <span className='text-red-500 mt-1'>{error}</span>
     </div>
   );
 }
