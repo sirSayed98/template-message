@@ -2,7 +2,7 @@ import { X } from 'lucide-react';
 
 export default function ImagePreview({
   uploadedImage,
-  removeImage,  
+  removeImage,
 }: {
   uploadedImage: {
     preview: string;
@@ -12,12 +12,14 @@ export default function ImagePreview({
 }) {
   return (
     <>
-      <div className="group">
-        <img
-          src={uploadedImage.preview}
-          alt={uploadedImage.file.name}
-          className="w-full h-full object-cover"
-        />
+      <div className="group h-full">
+        <div className='h-full w-full flex items-center ml-4'>
+          <img
+            src={uploadedImage.preview}
+            alt={uploadedImage.file.name}
+            className='h-[200px] w-[300px]'
+          />
+        </div>
 
         {/* Delete Button - Shows on Hover */}
         <button

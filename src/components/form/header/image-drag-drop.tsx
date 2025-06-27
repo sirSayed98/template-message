@@ -53,8 +53,7 @@ export default function ImageDragDrop({
   return (
     <>
       <div
-        className={`
-          relative border-2 border-dashed rounded-lg overflow-hidden transition-all duration-200 ease-in-out
+        className={`h-[240px] relative border-2 border-dashed rounded-lg overflow-hidden transition-all duration-200 ease-in-out
           ${uploadedImage ? 'border-gray-300' : 'cursor-pointer'}
           ${isDragOver && !uploadedImage
             ? 'border-blue-400 bg-blue-50 scale-105'
@@ -68,7 +67,6 @@ export default function ImageDragDrop({
         onDragOver={handleDragOver}
         onDrop={handleDrop}
         onClick={handleBrowseClick}
-        style={{  minHeight: '300px' }}
       >
         <input
           ref={fileInputRef as React.RefObject<HTMLInputElement>}
