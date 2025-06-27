@@ -1,8 +1,8 @@
 import { X } from 'lucide-react';
 
-export default function PreviewImage({
+export default function ImagePreview({
   uploadedImage,
-  removeImage,
+  removeImage,  
 }: {
   uploadedImage: {
     preview: string;
