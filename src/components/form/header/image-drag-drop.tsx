@@ -1,4 +1,4 @@
-import { type DragEvent, useState } from 'react';
+import { type DragEvent } from 'react';
 interface ImageFile {
   file: File;
   preview: string;
@@ -9,7 +9,9 @@ export default function ImageDragDrop({
   uploadedImage,
   handleBrowseClick,
   fileInputRef,
-  handleFileSelect
+  handleFileSelect,
+  isDragOver,
+  setIsDragOver
 }: {
   children: React.ReactNode;
   processFile: (file: File) => void;
@@ -17,11 +19,10 @@ export default function ImageDragDrop({
   handleBrowseClick: () => void;
   fileInputRef: React.RefObject<HTMLInputElement> | null;
   handleFileSelect: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  isDragOver: boolean;
+  setIsDragOver: (isDragOver: boolean) => void;
 }) {
   
-  const [isDragOver, setIsDragOver] = useState(false);
-  
-
   const handleDragEnter = (e: DragEvent<HTMLDivElement>) => {
     handleClick(e);
     setIsDragOver(true);
