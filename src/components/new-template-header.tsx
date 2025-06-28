@@ -12,7 +12,8 @@ export default function NewTemplateMessage() {
 
       <button
         type='submit'
-        onClick={() => {
+        onClick={(e) => {
+          e.preventDefault()
           setRunValidation(true)
         }}
         className='flex items-center gap-2 bg-[#9b7cb7] text-white text-sm px-4 py-2 rounded cursor-pointer'

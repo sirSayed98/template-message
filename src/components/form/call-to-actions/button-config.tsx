@@ -1,23 +1,47 @@
 import FormInputField from '@/components/common/form-input-field'
 import FormMultiSelect from '@/components/common/form-multi-select'
 import type { ButtonType as ButtonTypeInterface } from '@/context/interfaces'
+import { useTemplate } from '@/context/templateHook'
+import { isValidURL } from '@/utils/validation-helper'
 import { type ChangeEvent, useState } from 'react'
 import PhoneNumber from './phone-number'
-import { useTemplate } from '@/context/templateHook'
 
-export default function ButtonConfig({ id, onChange }: { id: number,  onChange: (id: number, buttonState: ButtonTypeInterface) => void }) {
-  
-  const { runValidation } = useTemplate();
+export default function ButtonConfig({
+  id,
+  onChange,
+}: {
+  id: number
+  onChange: (id: number, buttonState: ButtonTypeInterface) => void
+}) {
+  const { runValidation } = useTemplate()
 
   const [buttonState, setButtonState] = useState<ButtonTypeInterface>({
     type: 'URL',
     text: '',
-    value: {}
+    value: {},
   })
+
+  const buttonTextErrorMsg =
+    runValidation && !buttonState.text && 'Button text is required'
   
-  const buttonTextErrorMsg = runValidation && !buttonState.text && 'Button text is required'
-  const websiteUrlErrorMsg = runValidation && buttonState.type === 'URL' && !buttonState.value.url && 'Website URL is required'
-  const phoneNumberErrorMsg = runValidation && buttonState.type === 'CALL' && !buttonState.value.phone_number && 'Phone number is required'
+  const websiteUrlErrorMsg =
+    runValidation &&
+    buttonState.type === 'URL' &&
+    !buttonState.value.url &&
+    'Website URL is required'
+  
+  const phoneNumberErrorMsg =
+    runValidation &&
+    buttonState.type === 'CALL' &&
+    !buttonState.value.phone_number &&
+    'Phone number is required'
+  
+  const isWebsiteUrlValid =
+    (buttonState.type === 'URL' &&
+    buttonState.value.url &&
+    !isValidURL(buttonState.value.url)) ? 'Invalid website URL' : null
+    
+    
 
   return (
     <div className='bg-gray-50 p-4 rounded-md border border-gray-200'>
@@ -28,10 +52,14 @@ export default function ButtonConfig({ id, onChange }: { id: number,  onChange: 
             label='Button Type'
             options={[
               { key: 'URL', value: 'Visit Website' },
-              { key: 'CALL', value: 'Phone Number' }
+              { key: 'CALL', value: 'Phone Number' },
             ]}
             onChangeHandler={(key: string) => {
-              const newButtonState = { ...buttonState, type: key as ButtonTypeInterface['type'], value: {}}
+              const newButtonState = {
+                ...buttonState,
+                type: key as ButtonTypeInterface['type'],
+                value: {},
+              }
               setButtonState(newButtonState)
               onChange(id, newButtonState as ButtonTypeInterface)
             }}
@@ -59,25 +87,32 @@ export default function ButtonConfig({ id, onChange }: { id: number,  onChange: 
               label='Website URL'
               placeholder='https://www.google.com'
               name='websiteUrl'
-              onChangeHandler={(e: ChangeEvent<HTMLInputElement>) =>{
-                const newButtonState = { ...buttonState, value: {
-                  url: e.target.value
-                }}
+              onChangeHandler={(e: ChangeEvent<HTMLInputElement>) => {
+                const newButtonState = {
+                  ...buttonState,
+                  value: {
+                    url: e.target.value,
+                  },
+                }
                 setButtonState(newButtonState)
                 onChange(id, newButtonState as ButtonTypeInterface)
               }}
               type='url'
-              error={websiteUrlErrorMsg as string}
+              error={websiteUrlErrorMsg as string || isWebsiteUrlValid as string}
             />
           ) : (
-            <PhoneNumber onChange={(phoneNumber: string) =>{
-              const newButtonState = { ...buttonState, value: {
-                phone_number: phoneNumber
+            <PhoneNumber
+              onChange={(phoneNumber: string) => {
+                const newButtonState = {
+                  ...buttonState,
+                  value: {
+                    phone_number: phoneNumber,
+                  },
+                }
+                setButtonState(newButtonState)
+                onChange(id, newButtonState as ButtonTypeInterface)
               }}
-              setButtonState(newButtonState)
-              onChange(id, newButtonState as ButtonTypeInterface)
-            }} 
-            error={phoneNumberErrorMsg as string}
+              error={phoneNumberErrorMsg as string}
             />
           )}
         </div>
