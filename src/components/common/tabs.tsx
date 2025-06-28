@@ -21,7 +21,8 @@ export default function TabsComponent({ tabs,onChange }: { tabs: Tab[], onChange
           {tabs.map((tab) => (
             <button
               key={tab.id}
-              onClick={() => {
+              onClick={(e) => {
+                e.preventDefault()
                 setActiveTab(tab.id)
                 onChange(tab.id)
               }}

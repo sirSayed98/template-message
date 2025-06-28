@@ -5,10 +5,12 @@ export default function FormInputField({
   name,
   onChangeHandler,
   error,
+  type = 'text',
 }: {
   label: string
   placeholder: string
-  name: string
+  name: string,
+  type?: string,
   onChangeHandler: (e: React.ChangeEvent<HTMLInputElement>) => void
   error?: string
 }) {
@@ -24,7 +26,7 @@ export default function FormInputField({
       )}
 
       <input
-        type='text'
+        type={type}
         name={name}
         onChange={onChangeHandler}
         className='w-full bg-white px-3 py-2 border focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500'

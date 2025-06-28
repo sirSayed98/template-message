@@ -66,6 +66,7 @@ export default function ButtonConfig({ id, onChange }: { id: number,  onChange: 
                 setButtonState(newButtonState)
                 onChange(id, newButtonState as ButtonTypeInterface)
               }}
+              type='url'
               error={websiteUrlErrorMsg as string}
             />
           ) : (

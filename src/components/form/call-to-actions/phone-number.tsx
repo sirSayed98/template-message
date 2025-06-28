@@ -32,6 +32,7 @@ export default function PhoneNumber({ onChange, error }: { onChange: (phoneNumbe
           onChange(`${phoneNumberState.countryCode}${e.target.value}`)
         }}
         error={error as string}
+        type='tel'
       />
     </div>
   )

@@ -11,6 +11,7 @@ export default function NewTemplateMessage() {
       </div>
 
       <button
+        type='submit'
         onClick={() => {
           setRunValidation(true)
         }}

@@ -5,8 +5,10 @@ import { TemplateState } from "@/context/state"
 export default function Home() {
   return (
     <TemplateState>
-      <NewTemplateHeader />
-      <TemplateWrapper />
+      <form>
+        <NewTemplateHeader />
+        <TemplateWrapper />
+      </form>
     </TemplateState>
   )
 }
