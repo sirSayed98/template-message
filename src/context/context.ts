@@ -1,6 +1,6 @@
-import { createContext } from "react";
-import type { TemplateContextType } from "./interfaces";
+import { createContext } from 'react'
+import type { TemplateContextType } from './interfaces'
 
-const TemplateContext = createContext<TemplateContextType | null>(null);
+const TemplateContext = createContext<TemplateContextType | null>(null)
 
-export default TemplateContext;
+export default TemplateContext

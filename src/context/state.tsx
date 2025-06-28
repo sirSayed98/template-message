@@ -1,11 +1,19 @@
-import { useReducer } from "react";
-import TemplateContext from "./context";
-import { templateReducer } from "./reducer";
-import { SET_BODY, SET_BUTTONS, SET_CATEGORY, SET_FOOTER, SET_HEADER, SET_LANGUAGE, SET_RUN_VALIDATION, SET_TEMPLATE_NAME } from './types';
-import type { ButtonType, HeaderType } from './interfaces';
+import { useReducer } from 'react'
+import TemplateContext from './context'
+import { templateReducer } from './reducer'
+import {
+  SET_BODY,
+  SET_BUTTONS,
+  SET_CATEGORY,
+  SET_FOOTER,
+  SET_HEADER,
+  SET_LANGUAGE,
+  SET_RUN_VALIDATION,
+  SET_TEMPLATE_NAME,
+} from './types'
+import type { ButtonType, HeaderType } from './interfaces'
 
 export const TemplateState = ({ children }: { children: React.ReactNode }) => {
-  
   const [state, dispatch] = useReducer(templateReducer, {
     templateName: '',
     body: '',
@@ -13,47 +21,47 @@ export const TemplateState = ({ children }: { children: React.ReactNode }) => {
     language: '',
     category: '',
     header: {
-      format: 'none'
+      format: 'none',
     },
     buttons: [],
     runValidation: false,
-  });
+  })
 
   const setTemplateName = (templateName: string) => {
-    dispatch({ type: SET_TEMPLATE_NAME, payload: templateName });
-  };
+    dispatch({ type: SET_TEMPLATE_NAME, payload: templateName })
+  }
 
   const setBody = (body: string) => {
-    dispatch({ type: SET_BODY, payload: body });
-  };
+    dispatch({ type: SET_BODY, payload: body })
+  }
 
   const setFooter = (footer: string) => {
-    dispatch({ type: SET_FOOTER, payload: footer });
-  };
+    dispatch({ type: SET_FOOTER, payload: footer })
+  }
 
   const setLanguage = (language: string) => {
-    dispatch({ type: SET_LANGUAGE, payload: language });
-  };
+    dispatch({ type: SET_LANGUAGE, payload: language })
+  }
 
   const setCategory = (category: string) => {
-    dispatch({ type: SET_CATEGORY, payload: category });
-  };
+    dispatch({ type: SET_CATEGORY, payload: category })
+  }
 
   const setHeader = (header: HeaderType) => {
-    dispatch({ type: SET_HEADER, payload: header });
-  };
+    dispatch({ type: SET_HEADER, payload: header })
+  }
 
   const setButtons = (buttons: Array<ButtonType>) => {
-    dispatch({ type: SET_BUTTONS, payload: buttons });
-  };
+    dispatch({ type: SET_BUTTONS, payload: buttons })
+  }
 
   const setRunValidation = (runValidation: boolean) => {
-    dispatch({ type: SET_RUN_VALIDATION, payload: runValidation });
-  };
+    dispatch({ type: SET_RUN_VALIDATION, payload: runValidation })
+  }
 
-    return (
-    <TemplateContext.Provider 
-      value={{ 
+  return (
+    <TemplateContext.Provider
+      value={{
         templateName: state.templateName,
         language: state.language,
         body: state.body,
@@ -70,8 +78,9 @@ export const TemplateState = ({ children }: { children: React.ReactNode }) => {
         setHeader,
         setButtons,
         setRunValidation,
-      }}>
+      }}
+    >
       {children}
     </TemplateContext.Provider>
-  );
-};
+  )
+}
