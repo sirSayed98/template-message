@@ -21,7 +21,15 @@ export default function Buttons() {
   ]
 
   const resetButtons = () => {
-    setButtons([])
+    setButtons([
+      {
+        type: 'URL',
+        text: '',
+        value: {
+          url: ''
+        }
+      }
+    ])
   }
   return (
     <div className='mt-8'>

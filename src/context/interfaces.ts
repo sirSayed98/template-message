@@ -20,7 +20,7 @@ export interface ButtonType {
 export interface TemplateContextType {
   templateName: string;
   language: string;
-  category: 'Marketing' | 'Utility';
+  category: string;
   body: string;
   header: HeaderType;
   footer: string;

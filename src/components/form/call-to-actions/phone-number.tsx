@@ -1,7 +1,7 @@
 import FormInputField from '@/components/common/form-input-field'
 import FormMultiSelect from '@/components/common/form-multi-select'
 import { useState, type ChangeEvent } from 'react'
-export default function PhoneNumber({ onChange }: { onChange: (phoneNumber: string) => void }) {
+export default function PhoneNumber({ onChange, error }: { onChange: (phoneNumber: string) => void, error?: string }) {
   const [phoneNumberState, setPhoneNumberState] = useState({
     countryCode: '+44',
     phoneNumber: ''
@@ -31,6 +31,7 @@ export default function PhoneNumber({ onChange }: { onChange: (phoneNumber: stri
           setPhoneNumberState({...phoneNumberState, phoneNumber: e.target.value})
           onChange(`${phoneNumberState.countryCode}${e.target.value}`)
         }}
+        error={error as string}
       />
     </div>
   )
