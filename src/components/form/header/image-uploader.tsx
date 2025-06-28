@@ -78,6 +78,7 @@ const ImageUploader = () => {
   }
 
   const handleSelectFileClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault()
     e.stopPropagation()
     fileInputRef.current?.click()
   }
