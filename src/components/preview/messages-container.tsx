@@ -21,7 +21,7 @@ export default function MessageContainer() {
       <div className="text-left relative bg-white rounded-md shadow-xl border border-gray-200 p-3 max-w-sm">
         <div className="absolute w-4 h-3 bg-white transform rotate-50 left-[-5px] top-[12px]"></div>
         <div>
-          {header.format === 'image' && (
+          {header.format === 'image' && header.value?.image?.preview && (
              <img src={header.value?.image?.preview} alt="header-image" className="w-full h-full mb-3 object-cover" />
           )}
           {/* header */}
