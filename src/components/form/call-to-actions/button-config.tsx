@@ -2,7 +2,7 @@ import FormInputField from '@/components/common/form-input-field'
 import FormMultiSelect from '@/components/common/form-multi-select'
 import type { ButtonType as ButtonTypeInterface } from '@/context/interfaces'
 import { useTemplate } from '@/context/templateHook'
-import { isValidURL } from '@/utils/validation-helper'
+import { isValidPhoneNumber, isValidURL } from '@/utils/validation-helper'
 import { type ChangeEvent, useState } from 'react'
 import PhoneNumber from './phone-number'
 
@@ -40,6 +40,11 @@ export default function ButtonConfig({
     (buttonState.type === 'URL' &&
     buttonState.value.url &&
     !isValidURL(buttonState.value.url)) ? 'Invalid website URL' : null
+
+  const isPhoneNumberValid =
+    (buttonState.type === 'CALL' &&
+    buttonState.value.phone_number &&
+    !isValidPhoneNumber(buttonState.value.phone_number)) ? 'Invalid phone number' : null
     
     
 
@@ -112,7 +117,7 @@ export default function ButtonConfig({
                 setButtonState(newButtonState)
                 onChange(id, newButtonState as ButtonTypeInterface)
               }}
-              error={phoneNumberErrorMsg as string}
+              error={phoneNumberErrorMsg as string || isPhoneNumberValid as string}
             />
           )}
         </div>
