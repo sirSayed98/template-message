@@ -5,6 +5,5 @@ export const isValidURL = (url: string) => {
 
 export const isValidPhoneNumber = (phoneNumber: string) => {
   const regex = /^\+\d{8,}$/
-  console.log(phoneNumber, regex.test(phoneNumber))
   return regex.test(phoneNumber)
 }
