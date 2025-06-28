@@ -8,11 +8,12 @@ export default function MessageContainer() {
   const currentTime = getCurrentTimeFormatted();
   const shouldShowMessage = body.length > 0 ||
     footer.length > 0 ||
-    header?.format !== 'none' ||
+    (header?.format !== 'none' && (header.value?.text || header?.value?.image?.preview)) ||
     buttons.length > 0;
 
   if (!shouldShowMessage) return null;
   return (
+    <>
     <div
       className={`transform transition-all duration-500 ease-out translate-x-0 translate-y-0 opacity-100 scale-100`}
     >
@@ -57,5 +58,6 @@ export default function MessageContainer() {
         </div>
       </div>
     </div>
+    </>
   )
 }
