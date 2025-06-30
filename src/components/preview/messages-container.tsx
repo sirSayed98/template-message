@@ -42,7 +42,7 @@ export default function MessageContainer() {
           {buttons.map((button, index) => (
             <>
               <hr className="border-gray-200" />
-              <button key={index} className="w-full flex items-center justify-center gap-1 py-3 text-[#00A5F4] font-medium cursor-pointer break-words">
+              <button onClick={(e) => e.preventDefault()} key={index} className="w-full flex items-center justify-center gap-1 py-3 text-[#00A5F4] font-medium cursor-pointer break-words">
                 {button.type === 'URL' && <SquareArrowOutUpRight size={16} />}
                 {button.type === 'CALL' && <Phone size={16} />}
                 {button.text}
