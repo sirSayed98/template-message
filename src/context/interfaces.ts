@@ -34,6 +34,7 @@ export interface TemplateContextType {
   setHeader: (header: HeaderType) => void
   setButtons: (buttons: Array<ButtonType>) => void
   setRunValidation: (runValidation: boolean) => void
+  getStructuredJSON: () => void
 }
 
 export interface TemplateStateType {

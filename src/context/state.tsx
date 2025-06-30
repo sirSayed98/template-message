@@ -1,5 +1,6 @@
 import { useReducer } from 'react'
 import TemplateContext from './context'
+import type { ButtonType, HeaderType } from './interfaces'
 import { templateReducer } from './reducer'
 import {
   SET_BODY,
@@ -11,7 +12,7 @@ import {
   SET_RUN_VALIDATION,
   SET_TEMPLATE_NAME,
 } from './types'
-import type { ButtonType, HeaderType } from './interfaces'
+import { constructStructuredJSON } from './helper'
 
 export const TemplateState = ({ children }: { children: React.ReactNode }) => {
   const [state, dispatch] = useReducer(templateReducer, {
@@ -59,6 +60,11 @@ export const TemplateState = ({ children }: { children: React.ReactNode }) => {
     dispatch({ type: SET_RUN_VALIDATION, payload: runValidation })
   }
 
+  const getStructuredJSON = () =>{
+    const structuredJSON = constructStructuredJSON(state)
+    console.log(structuredJSON)
+  }
+
   return (
     <TemplateContext.Provider
       value={{
@@ -78,6 +84,7 @@ export const TemplateState = ({ children }: { children: React.ReactNode }) => {
         setHeader,
         setButtons,
         setRunValidation,
+        getStructuredJSON,
       }}
     >
       {children}
