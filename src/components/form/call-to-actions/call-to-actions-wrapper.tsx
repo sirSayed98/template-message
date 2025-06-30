@@ -29,6 +29,12 @@ export default function CallToActionsWrapper() {
     newButtons[id] = button
     setButtons(newButtons)
   }
+  const handleDeleteButton = (id: number) => {
+    const newButtons = [...buttons]
+    newButtons.splice(id, 1)
+    setButtons(newButtons)
+    setCount(count - 1)
+  }
 
  
   return (
@@ -38,7 +44,7 @@ export default function CallToActionsWrapper() {
           <div className='w-full'>
             <ButtonConfig id={index} onChange={handleButtonChange} />
           </div>
-          <Trash2 onClick={() => setCount(count - 1)} size={16} className='cursor-pointer' color='gray' />
+          <Trash2 onClick={() => handleDeleteButton(index)} size={16} className='cursor-pointer' color='gray' />
         </div>
       ))}
       {count < 2 && (
