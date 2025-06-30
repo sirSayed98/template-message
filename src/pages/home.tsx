@@ -1,4 +1,4 @@
-import NewTemplateHeader from "@/components/new-template-header"
+import NewTemplateHeader from "@/components/template-header"
 import TemplateWrapper from "@/components/template-wrapper"
 import { TemplateState } from "@/context/state"
 

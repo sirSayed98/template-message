@@ -4,7 +4,6 @@ import { Plus, Save } from 'lucide-react'
 export default function NewTemplateMessage() {
   const { setRunValidation, getStructuredJSON } = useTemplate()
   return (
-    // make this div nav fixed at the top of the page
     <div className='mb-12'>
       <div className='fixed top-0 left-0 right-0 z-10 bg-white flex items-center justify-between border-b border-[#F1F3F5] p-2'>
         <div className='flex items-center space-x-2 text-black text-sm font-medium'>
