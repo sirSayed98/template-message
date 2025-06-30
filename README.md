@@ -6,6 +6,9 @@ A modern React application for creating and previewing WhatsApp-style message te
 
 Template Message Builder is a user-friendly web application that enables users to create, customize, and preview message templates commonly used in business communications and messaging platforms. The application provides an intuitive interface with form controls on the left and a live mobile preview on the right, making it easy to design professional message templates with headers, body content, footers, and interactive buttons.
 
+![image](https://github.com/user-attachments/assets/cb4b6675-ba1b-4a4b-9bf3-719b9ca9f141)
+
+
 ### Key Highlights
 - **Real-time Preview**: See your message template rendered instantly in a mobile-friendly interface
 - **Flexible Header Options**: Support for text headers, image uploads, or no header
