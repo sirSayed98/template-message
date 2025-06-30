@@ -1,4 +1,7 @@
+import debounce from 'lodash.debounce'
+import React, { useMemo } from 'react'
 import './form.css'
+
 export default function FormInputField({
   label,
   placeholder,
@@ -6,6 +9,7 @@ export default function FormInputField({
   onChangeHandler,
   error,
   type = 'text',
+  debounceDelay = 300,
 }: {
   label: string
   placeholder: string
@@ -13,7 +17,13 @@ export default function FormInputField({
   type?: string,
   onChangeHandler: (e: React.ChangeEvent<HTMLInputElement>) => void
   error?: string
+  debounceDelay?: number
 }) {
+  const debouncedHandler = useMemo(
+    () => debounce(onChangeHandler, debounceDelay),
+    [onChangeHandler, debounceDelay]
+  )
+
   return (
     <div>
       {label && (
@@ -28,7 +38,7 @@ export default function FormInputField({
       <input
         type={type}
         name={name}
-        onChange={onChangeHandler}
+        onChange={debouncedHandler}
         className='w-full bg-white px-3 py-2 border focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500'
         placeholder={placeholder}
       />

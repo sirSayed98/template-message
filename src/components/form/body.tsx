@@ -1,9 +1,16 @@
 import { useTemplate } from '@/context/templateHook'
 import FormInputHeader from '../common/form-input-header'
+import debounce from 'lodash.debounce'
+import { useMemo } from 'react'
 
 export default function Body() {
   const { setBody, errorMsgs } = useTemplate()
   const { bodyError } = errorMsgs
+  
+  const debouncedHandler = useMemo(
+    () => debounce((value: string) => setBody(value), 300),
+    [setBody]
+  )
   return (
     <div className='mt-8'>
       <FormInputHeader
@@ -22,9 +29,7 @@ export default function Body() {
             padding: '8px',
             fontSize: '16px',
           }}
-          onChange={e => {
-            setBody(e.target.value)
-          }}
+          onChange={(e) => debouncedHandler(e.target.value)}
         />
         {bodyError && (
           <span className='text-red-500 mt-1'>{bodyError as string}</span>
