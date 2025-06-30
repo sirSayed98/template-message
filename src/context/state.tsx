@@ -10,7 +10,6 @@ import {
   SET_FOOTER,
   SET_HEADER,
   SET_LANGUAGE,
-  SET_RUN_VALIDATION,
   SET_TEMPLATE_NAME,
 } from './types'
 import { constructStructuredJSON } from './helper'
@@ -37,7 +36,6 @@ export const TemplateState = ({ children }: { children: React.ReactNode }) => {
       buttonPhoneNumberError: [],
     },
     buttons: [],
-    runValidation: false,
   })
 
   const setTemplateName = (templateName: string) => {
@@ -68,10 +66,6 @@ export const TemplateState = ({ children }: { children: React.ReactNode }) => {
     dispatch({ type: SET_BUTTONS, payload: buttons })
   }
 
-  const setRunValidation = (runValidation: boolean) => {
-    dispatch({ type: SET_RUN_VALIDATION, payload: runValidation })
-  }
-
   const getStructuredJSON = () =>{
     const { structuredJSON, errorMsgs } = constructStructuredJSON(state)
     dispatch({ type: SET_ERROR_MSGS, payload: errorMsgs })
@@ -89,7 +83,6 @@ export const TemplateState = ({ children }: { children: React.ReactNode }) => {
         category: state.category,
         header: state.header,
         buttons: state.buttons,
-        runValidation: state.runValidation,
         errorMsgs: state.errorMsgs,
         setTemplateName,
         setBody,
@@ -98,7 +91,6 @@ export const TemplateState = ({ children }: { children: React.ReactNode }) => {
         setCategory,
         setHeader,
         setButtons,
-        setRunValidation,
         getStructuredJSON,
       }}
     >

@@ -36,7 +36,6 @@ export interface TemplateContextType {
   header: HeaderType
   footer: string
   buttons: Array<ButtonType>
-  runValidation: boolean
   errorMsgs: ErrorMsgsType
   setTemplateName: (templateName: string) => void
   setLanguage: (language: string) => void
@@ -45,7 +44,6 @@ export interface TemplateContextType {
   setCategory: (category: string) => void
   setHeader: (header: HeaderType) => void
   setButtons: (buttons: Array<ButtonType>) => void
-  setRunValidation: (runValidation: boolean) => void
   getStructuredJSON: () => void
 }
 
@@ -57,6 +55,5 @@ export interface TemplateStateType {
   footer: string
   header: HeaderType
   buttons: Array<ButtonType>
-  runValidation: boolean
   errorMsgs: ErrorMsgsType
 }

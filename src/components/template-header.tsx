@@ -2,7 +2,7 @@ import { useTemplate } from '@/context/templateHook'
 import { Plus, Save } from 'lucide-react'
 
 export default function NewTemplateMessage() {
-  const { setRunValidation, getStructuredJSON } = useTemplate()
+  const { getStructuredJSON } = useTemplate()
   return (
     <div className='mb-12'>
       <div className='fixed top-0 left-0 right-0 z-10 bg-white flex items-center justify-between border-b border-[#F1F3F5] p-2'>
@@ -15,7 +15,6 @@ export default function NewTemplateMessage() {
           type='submit'
           onClick={e => {
             e.preventDefault()
-            setRunValidation(true)
             getStructuredJSON()
           }}
           className='flex items-center gap-2 bg-[#9b7cb7] text-white text-sm px-4 py-2 rounded cursor-pointer'

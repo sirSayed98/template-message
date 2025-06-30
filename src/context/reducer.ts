@@ -6,7 +6,6 @@ import {
   SET_FOOTER,
   SET_HEADER,
   SET_LANGUAGE,
-  SET_RUN_VALIDATION,
   SET_TEMPLATE_NAME,
   SET_ERROR_MSGS,
 } from './types'
@@ -28,8 +27,6 @@ export const templateReducer = (state: TemplateStateType, action: any) => {
       return { ...state, header: action.payload }
     case SET_BUTTONS:
       return { ...state, buttons: action.payload }
-    case SET_RUN_VALIDATION:
-      return { ...state, runValidation: action.payload }
     case SET_ERROR_MSGS:
       return { ...state, errorMsgs: action.payload }
     default:
