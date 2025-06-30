@@ -28,9 +28,9 @@ const categories: CategoryOption[] = [
 
 const MessageCategorySection = () => {
   const [selected, setSelected] = useState('')
-  const { setCategory, runValidation } = useTemplate()
+  const { setCategory, errorMsgs } = useTemplate()
 
-  const categoryErrorMsg = runValidation && !selected && 'Category is required'
+  const { categoryError } = errorMsgs
 
   const handleCategorySelect = (categoryId: string) => {
     setSelected(categoryId)
@@ -98,9 +98,9 @@ const MessageCategorySection = () => {
           </div>
         ))}
 
-        {categoryErrorMsg && (
+        {categoryError && (
           <span className='text-red-500 mt-1'>
-            {categoryErrorMsg as string}
+            {categoryError as string}
           </span>
         )}
       </div>

@@ -3,25 +3,14 @@ import FormInputHeader from '@/components/common/form-input-header'
 import FormMultiSelect from '@/components/common/form-multi-select'
 import { useTemplate } from '@/context/templateHook'
 
-const TEMPLATE_NAME_CHAR_LIMIT = 20
-export default function TempleteDetails() {
+export default function TemplateDetails() {
   const {
     setTemplateName,
     setLanguage,
-    templateName,
-    language,
-    runValidation,
+    errorMsgs,
   } = useTemplate()
 
-  const templateNameErrorMsg =
-    runValidation && !templateName && 'Template name is required'
-
-  const templateNameCharLimit =
-    templateName && templateName.length > TEMPLATE_NAME_CHAR_LIMIT
-      ? 'Template name must be less than 20 characters'
-      : ''
-
-  const languageErrorMsg = runValidation && !language && 'Language is required'
+  const { languageError, templateNameError } = errorMsgs 
 
   return (
     <div className='mt-8'>
@@ -37,7 +26,7 @@ export default function TempleteDetails() {
           onChangeHandler={e => {
             setTemplateName(e.target.value)
           }}
-          error={templateNameErrorMsg as string || templateNameCharLimit as string}
+          error={templateNameError as string}
         />
         <div className='mt-2'>
           <FormMultiSelect
@@ -50,7 +39,7 @@ export default function TempleteDetails() {
             onChangeHandler={e => {
               setLanguage(e)
             }}
-            error={languageErrorMsg as string}
+            error={languageError as string}
           />
         </div>
       </div>

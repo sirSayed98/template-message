@@ -17,6 +17,17 @@ export interface ButtonType {
     phone_number?: string
   }
 }
+export interface ErrorMsgsType {
+  languageError: string
+  templateNameError: string
+  categoryError?: string
+  bodyError?: string
+  headerImageError?: string
+  headerTextError?: string
+  buttonTextError?: string[]
+  buttonUrlError?: string []
+  buttonPhoneNumberError?: string []
+}
 export interface TemplateContextType {
   templateName: string
   language: string
@@ -26,6 +37,7 @@ export interface TemplateContextType {
   footer: string
   buttons: Array<ButtonType>
   runValidation: boolean
+  errorMsgs: ErrorMsgsType
   setTemplateName: (templateName: string) => void
   setLanguage: (language: string) => void
   setBody: (body: string) => void
@@ -46,4 +58,5 @@ export interface TemplateStateType {
   header: HeaderType
   buttons: Array<ButtonType>
   runValidation: boolean
+  errorMsgs: ErrorMsgsType
 }

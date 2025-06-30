@@ -8,6 +8,7 @@ import {
   SET_LANGUAGE,
   SET_RUN_VALIDATION,
   SET_TEMPLATE_NAME,
+  SET_ERROR_MSGS,
 } from './types'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -29,6 +30,8 @@ export const templateReducer = (state: TemplateStateType, action: any) => {
       return { ...state, buttons: action.payload }
     case SET_RUN_VALIDATION:
       return { ...state, runValidation: action.payload }
+    case SET_ERROR_MSGS:
+      return { ...state, errorMsgs: action.payload }
     default:
       return state
   }

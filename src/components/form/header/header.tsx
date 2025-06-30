@@ -4,20 +4,12 @@ import TabsComponent from '@/components/common/tabs'
 import { useTemplate } from '@/context/templateHook'
 import { AlignJustify, Image } from 'lucide-react'
 import ImageUploader from './image-uploader'
+import { useState } from 'react'
 
 export default function Header() {
-  const { setHeader, header, runValidation } = useTemplate()
-  const headerTextErrorMsg =
-    runValidation &&
-    header.format === 'text' &&
-    !header.value?.text &&
-    'Header text is required'
-
-  const headerImageErrorMsg =
-    runValidation &&
-    header.format === 'image' &&
-    !header.value?.image &&
-    'Header image is required'
+  const { setHeader, errorMsgs } = useTemplate()
+  const [activeTab, setActiveTab] = useState<'none' | 'text' | 'image'>('none')
+  const { headerTextError, headerImageError } = errorMsgs
 
   const tabs = [
     { id: 'none', label: 'None' },
@@ -53,6 +45,7 @@ export default function Header() {
     setHeader({
       format: tabId as 'none' | 'text' | 'image',
     })
+    setActiveTab(tabId as 'none' | 'text' | 'image')
   }
   return (
     <div className='mt-8'>
@@ -62,8 +55,8 @@ export default function Header() {
       />
       <div className='p-4 space-y-3 bg-white mt-1 rounded-sm'>
         <TabsComponent tabs={tabs} onChange={resetHeader} />
-        {headerTextErrorMsg && <span className='text-red-500 mt-1'>{headerTextErrorMsg as string}</span>}
-        {headerImageErrorMsg && <span className='text-red-500 mt-1'>{headerImageErrorMsg as string}</span>}
+        {headerTextError && activeTab === 'text' && <span className='text-red-500 mt-1'>{headerTextError as string}</span>}
+        {headerImageError && activeTab === 'image' && <span className='text-red-500 mt-1'>{headerImageError as string}</span>}
       </div>
     </div>
   )

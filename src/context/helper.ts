@@ -1,8 +1,19 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { isValidPhoneNumber, isValidURL } from '../utils/validation-helper'
-import type { ButtonType, HeaderType, TemplateStateType } from './interfaces'
+import { isValidPhoneNumber, isValidURL } from '../utils/validation-helper';
+import type { ButtonType, ErrorMsgsType, HeaderType, TemplateStateType } from './interfaces';
+
+const TEMPLATE_NAME_CHAR_LIMIT = 20;
+
+let errorMsgs: ErrorMsgsType = {} as ErrorMsgsType
+
+
 const constructHeader = (header: HeaderType) => {
   if (header.format === 'image') {
+    if(!header.value?.image){
+      errorMsgs.headerImageError = 'Image is required'
+      return null;
+    }
+     errorMsgs.headerImageError = '';
     return {
       type: 'HEADER',
       format: 'IMAGE',
@@ -12,6 +23,11 @@ const constructHeader = (header: HeaderType) => {
     }
   }
   if (header.format === 'text') {
+    if(!header.value?.text){
+      errorMsgs.headerTextError = 'Text is required'
+      return null;
+    }
+    errorMsgs.headerTextError = '';
     return {
       type: 'HEADER',
       format: 'TEXT',
@@ -26,30 +42,46 @@ const constructButtons = (buttons: ButtonType[]) => {
  
   let isButtonsHasError = false
   const validButtons: ButtonType[] = [];
+  errorMsgs.buttonTextError = []
+  errorMsgs.buttonUrlError = []
+  errorMsgs.buttonPhoneNumberError = []
 
-  buttons.forEach((button: ButtonType) => {
+  buttons.forEach((button: ButtonType, index: number) => {
+    // validate button text
     if (!button.text) {
       isButtonsHasError = true
-      return
+      errorMsgs.buttonTextError![index] = 'Text is required' 
+    } else {
+      errorMsgs.buttonTextError![index] = ''
     }
-
-    if (button.text && button.type === 'URL' && button.value.url) {
-      if (isValidURL(button.value.url)) {
+    
+    // validate button url
+    if (button.type === 'URL') {
+      if(!button.value.url){
+        isButtonsHasError = true
+        errorMsgs.buttonUrlError![index] = 'URL is required'
+      }
+      else if (isValidURL(button.value.url)) {
         validButtons.push(button)
-        return
+        errorMsgs.buttonUrlError![index] = ''
       } else {
         isButtonsHasError = true
-        return
+        errorMsgs.buttonUrlError![index] = 'Invalid URL'
       }
     }
 
-    if (button.text && button.type === 'CALL' && button.value.phone_number) {
-      if (isValidPhoneNumber(button.value.phone_number)) {
+    // validate button phone number
+    if (button.type === 'CALL') {
+      if(!button.value.phone_number){
+        isButtonsHasError = true
+        errorMsgs.buttonPhoneNumberError![index] = 'Phone number is required'
+      }
+      else if (isValidPhoneNumber(button.value.phone_number)) {
         validButtons.push(button)
-        return
+        errorMsgs.buttonPhoneNumberError![index] = ''
       } else {
         isButtonsHasError = true
-        return
+        errorMsgs.buttonPhoneNumberError![index] = 'Invalid phone number'
       }
     }
   })
@@ -63,10 +95,30 @@ const constructButtons = (buttons: ButtonType[]) => {
 }
 
 export const constructStructuredJSON = (state: TemplateStateType) : any  => {
-  const structuredJSON: any = {
-    language: state.language,
-    name: state.templateName,
-    category: state.category,
+  const structuredJSON: any = {}
+  errorMsgs = {} as ErrorMsgsType
+
+  if(!state.language){
+    errorMsgs.languageError = 'Language is required'
+  } else{
+    errorMsgs.languageError = ''
+    structuredJSON.language = state.language
+  }
+  
+  if(!state.templateName){
+    errorMsgs.templateNameError = 'Template name is required'
+  } else if(state.templateName.length > TEMPLATE_NAME_CHAR_LIMIT){
+    errorMsgs.templateNameError = `Template name must be less than ${TEMPLATE_NAME_CHAR_LIMIT} characters`
+  } else {
+    errorMsgs.templateNameError = ''
+    structuredJSON.name = state.templateName
+  }
+
+  if(!state.category){
+    errorMsgs.categoryError = 'Category is required'
+  } else{
+    errorMsgs.categoryError = ''
+    structuredJSON.category = state.category
   }
 
   const components = []
@@ -78,13 +130,18 @@ export const constructStructuredJSON = (state: TemplateStateType) : any  => {
     }
   }
 
-  if (state.body) {
+  // required
+  if (!state.body) {
+    errorMsgs.bodyError = 'Body is required'
+  } else {
+    errorMsgs.bodyError = ''
     components.push({
       type: 'BODY',
       text: state.body,
     })
   }
-
+  
+  // optional
   if (state.footer) {
     components.push({
       type: 'FOOTER',
@@ -104,5 +161,8 @@ export const constructStructuredJSON = (state: TemplateStateType) : any  => {
     structuredJSON.components = components
   }
 
-  return structuredJSON;
+  return {
+    structuredJSON,
+    errorMsgs
+  };
 }

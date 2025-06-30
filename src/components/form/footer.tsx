@@ -3,8 +3,7 @@ import FormInputField from '../common/form-input-field'
 import FormInputHeader from '../common/form-input-header'
 
 export default function Footer() {
-  const { setFooter, runValidation, footer } = useTemplate()
-  const footerErrorMsg = runValidation && !footer && 'Footer is required'
+  const { setFooter } = useTemplate()
   return (
     <div className='mt-8'>
       <FormInputHeader
@@ -20,9 +19,6 @@ export default function Footer() {
             setFooter(e.target.value)
           }}
         />
-        {footerErrorMsg && (
-          <span className='text-red-500 mt-1'>{footerErrorMsg as string}</span>
-        )}
       </div>
     </div>
   )

@@ -2,8 +2,8 @@ import { useTemplate } from '@/context/templateHook'
 import FormInputHeader from '../common/form-input-header'
 
 export default function Body() {
-  const { setBody, runValidation, body } = useTemplate()
-  const bodyErrorMsg = runValidation && !body && 'Body is required'
+  const { setBody, errorMsgs } = useTemplate()
+  const { bodyError } = errorMsgs
   return (
     <div className='mt-8'>
       <FormInputHeader
@@ -26,8 +26,8 @@ export default function Body() {
             setBody(e.target.value)
           }}
         />
-        {bodyErrorMsg && (
-          <span className='text-red-500 mt-1'>{bodyErrorMsg as string}</span>
+        {bodyError && (
+          <span className='text-red-500 mt-1'>{bodyError as string}</span>
         )}
       </div>
     </div>

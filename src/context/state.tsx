@@ -6,6 +6,7 @@ import {
   SET_BODY,
   SET_BUTTONS,
   SET_CATEGORY,
+  SET_ERROR_MSGS,
   SET_FOOTER,
   SET_HEADER,
   SET_LANGUAGE,
@@ -23,6 +24,17 @@ export const TemplateState = ({ children }: { children: React.ReactNode }) => {
     category: '',
     header: {
       format: 'none',
+    },
+    errorMsgs: {
+      languageError: '',
+      templateNameError: '',
+      categoryError: '',
+      bodyError: '',
+      headerImageError: '',
+      headerTextError: '',
+      buttonTextError: [],
+      buttonUrlError: [],
+      buttonPhoneNumberError: [],
     },
     buttons: [],
     runValidation: false,
@@ -61,8 +73,10 @@ export const TemplateState = ({ children }: { children: React.ReactNode }) => {
   }
 
   const getStructuredJSON = () =>{
-    const structuredJSON = constructStructuredJSON(state)
+    const { structuredJSON, errorMsgs } = constructStructuredJSON(state)
+    dispatch({ type: SET_ERROR_MSGS, payload: errorMsgs })
     console.log(structuredJSON)
+    // TODO: send structuredJSON to backend
   }
 
   return (
@@ -76,6 +90,7 @@ export const TemplateState = ({ children }: { children: React.ReactNode }) => {
         header: state.header,
         buttons: state.buttons,
         runValidation: state.runValidation,
+        errorMsgs: state.errorMsgs,
         setTemplateName,
         setBody,
         setFooter,
