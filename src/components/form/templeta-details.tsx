@@ -2,8 +2,9 @@ import FormInputField from '@/components/common/form-input-field'
 import FormInputHeader from '@/components/common/form-input-header'
 import FormMultiSelect from '@/components/common/form-multi-select'
 import { useTemplate } from '@/context/templateHook'
+import { memo } from 'react'
 
-export default function TemplateDetails() {
+export const TemplateDetails = memo(function TemplateDetails() {
   const {
     setTemplateName,
     setLanguage,
@@ -45,4 +46,4 @@ export default function TemplateDetails() {
       </div>
     </div>
   )
-}
+})
