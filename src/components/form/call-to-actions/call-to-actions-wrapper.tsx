@@ -18,7 +18,8 @@ export default function CallToActionsWrapper() {
   const { setButtons,buttons } = useTemplate()
   
   
-  const addButton = () => {
+  const addButton = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault()
     setCount(count + 1)
     setButtons([...buttons, emptyButton])
   }

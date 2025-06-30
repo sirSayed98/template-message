@@ -1,8 +1,11 @@
+import { lazy, Suspense } from 'react'
 import FormInputHeader from '@/components/common/form-input-header'
 import TabsComponent from '@/components/common/tabs'
 import { Target } from 'lucide-react'
-import CallToActionsWrapper from './call-to-actions/call-to-actions-wrapper'
 import { useTemplate } from '@/context/templateHook'
+
+const CallToActionsWrapper = lazy(() => import('./call-to-actions/call-to-actions-wrapper'))
+// dynamic import CallToActionsWrapper
 
 export default function Buttons() {
   const { setButtons } = useTemplate()
@@ -14,7 +17,9 @@ export default function Buttons() {
       icon: <Target size={16} />,
       content: (
         <div className='mt-4'>
-          <CallToActionsWrapper />
+          <Suspense fallback={<p className='text-sm text-gray-500'>Loading...</p>}>
+            <CallToActionsWrapper />
+          </Suspense>
         </div>
       ),
     },
